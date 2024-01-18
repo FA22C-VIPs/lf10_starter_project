@@ -1,0 +1,68 @@
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: transparent;
+  color: #000000;
+}
+
+.logo {
+  /* Hier kannst du das Styling für dein Logo anpassen */
+}
+
+.title {
+  flex: 1; /* Füllt den verbleibenden Platz aus */
+  text-align: center; /* Optional: Zentriere den Text */
+}
+
+.logout-button {
+  /* Hier kannst du das Styling für den Logout-Button anpassen */
+}
+
+.logout-button button {
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  color: #000000;
+  background-color: transparent;
+}
+
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-bar .left-side,
+.bottom-bar .right-side {
+  flex: 1;
+  text-align: center;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+}
+
+.bottom-bar button {
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  background-color: transparent;
+  width: 100%; /* Füllt den verfügbaren Platz */
+}
+
+.row{
+  margin-right: 0;
+  margin-left: 0;
+}
