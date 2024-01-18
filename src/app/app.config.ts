@@ -13,9 +13,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
         clientId: 'employee-management-service-frontend'
       },
       initOptions: {
-        onLoad: 'check-sso',
-        silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html'
+        onLoad: 'login-required',
       }
     })
       .catch((error) :void => {
