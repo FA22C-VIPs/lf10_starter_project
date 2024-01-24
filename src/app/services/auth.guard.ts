@@ -10,6 +10,8 @@ import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
   providedIn: 'root'
 })
 export class AuthGuard extends KeycloakAuthGuard {
+
+  token = "empty";
   constructor(
     protected override readonly router: Router,
     protected readonly keycloak: KeycloakService
@@ -28,6 +30,7 @@ export class AuthGuard extends KeycloakAuthGuard {
       });
     }
 
+    this.token = await this.keycloak.getToken();
     // Get the roles required from the route.
     const requiredRoles = route.data['roles'];
 
@@ -38,5 +41,9 @@ export class AuthGuard extends KeycloakAuthGuard {
 
     // Allow the user to proceed if all the required roles are present.
     return requiredRoles.every((role) => this.roles.includes(role));
+  }
+
+  public GetToken() {
+    return this.token;
   }
 }
