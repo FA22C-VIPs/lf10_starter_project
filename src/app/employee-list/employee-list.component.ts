@@ -15,8 +15,7 @@ import {FormsModule} from "@angular/forms";
 export class EmployeeListComponent {
   TotalEmployees$: Observable<Employee[]>;
   displayedEmployees$: Observable<Employee[]>;
-  // @ts-ignore
-  searchedId$: number;
+  searchedId$: number | undefined;
   searchedFirstname$: string = '';
   searchedLastname$: string = '';
 
@@ -33,7 +32,10 @@ export class EmployeeListComponent {
   searchForEmployee() {
     this.displayedEmployees$ = this.TotalEmployees$.pipe(
       map(employees => employees.filter(employee => {
-        let matchesId = this.searchedId$ > -1 ? employee.id === this.searchedId$ : true;
+        let matchesId = true;
+        if (typeof this.searchedId$ === 'number' && this.searchedId$ > -1) {
+          matchesId = employee.id === this.searchedId$;
+        }
         let matchesFirstName = this.searchedFirstname$ !== '' ? employee.firstName?.includes(this.searchedFirstname$) : true;
         let matchesLastName = this.searchedLastname$ !== '' ? employee.lastName?.includes(this.searchedLastname$) : true;
 
@@ -41,6 +43,7 @@ export class EmployeeListComponent {
       }))
     );
   }
+
 
   resetDisplay() {
     this.displayedEmployees$ = this.TotalEmployees$;
