@@ -1,9 +1,20 @@
-<input type="number" [(ngModel)]="searchedId$" name="id"><input type="text" [(ngModel)]="searchedFirstname$"  name="firstname"><input type="text" [(ngModel)]="searchedLastname$"  name="lastname"><button (click)="searchForEmployee()">Suchen</button><button (click)="resetDisplay()">Zurücksetzen</button>
-<div class="border" *ngIf="(displayedEmployees$ | async) as employees; else load">
-  <li class="content" *ngFor="let employee of employees">
-    {{employee.id }} {{employee.firstName }} {{employee.lastName}}
-  </li>
-</div>
+<input type="number" [(ngModel)]="searchedId$" name="id" placeholder="ID" (change)="onInputChange($event)"><input type="text" [(ngModel)]="searchedFirstname$"  name="firstname" placeholder="First Name" (change)="onInputChange($event)"><input type="text" [(ngModel)]="searchedLastname$"  name="lastname" placeholder="Last Name" (change)="onInputChange($event)">
+<table *ngIf="(displayedEmployees$ | async) as employees; else load">
+  <thead>
+  <tr>
+    <th>ID Number</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let employee of employees">
+    <td>{{ employee.id }}</td>
+    <td>{{ employee.firstName }}</td>
+    <td>{{ employee.lastName }}</td>
+  </tr>
+  </tbody>
+</table>
 
 <ng-template #load>
   <div>Loading...</div>

@@ -13,29 +13,26 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './employee-list.component.css'
 })
 export class EmployeeListComponent {
-  TotalEmployees$: Observable<Employee[]>;
+  totalEmployees$: Observable<Employee[]>;
   displayedEmployees$: Observable<Employee[]>;
   searchedId$: number | undefined;
   searchedFirstname$: string = '';
   searchedLastname$: string = '';
 
   constructor(private handler: ExternalEmployeeServiceHandler) {
-    this.TotalEmployees$ = of([]);
+    this.totalEmployees$ = of([]);
     this.fetchData();
-    this.displayedEmployees$ = this.TotalEmployees$;
+    this.displayedEmployees$ = this.totalEmployees$;
   }
 
   fetchData() {
-    this.TotalEmployees$ = this.handler.requestAllEmployees();
+    this.totalEmployees$ = this.handler.requestAllEmployees();
   }
 
   searchForEmployee() {
-    this.displayedEmployees$ = this.TotalEmployees$.pipe(
+    this.displayedEmployees$ = this.totalEmployees$.pipe(
       map(employees => employees.filter(employee => {
-        let matchesId = true;
-        if (typeof this.searchedId$ === 'number' && this.searchedId$ > -1) {
-          matchesId = employee.id === this.searchedId$;
-        }
+        let matchesId = this.searchedId$ != null && this.searchedId$ > -1 ? employee.id === this.searchedId$ : true;
         let matchesFirstName = this.searchedFirstname$ !== '' ? employee.firstName?.includes(this.searchedFirstname$) : true;
         let matchesLastName = this.searchedLastname$ !== '' ? employee.lastName?.includes(this.searchedLastname$) : true;
 
@@ -44,8 +41,11 @@ export class EmployeeListComponent {
     );
   }
 
-
   resetDisplay() {
-    this.displayedEmployees$ = this.TotalEmployees$;
+    this.displayedEmployees$ = this.totalEmployees$;
+  }
+
+  onInputChange($event: Event) {
+    this.searchForEmployee();
   }
 }
