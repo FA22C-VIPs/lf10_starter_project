@@ -16,9 +16,9 @@ export class EmployeeListComponent {
   TotalEmployees$: Observable<Employee[]>;
   displayedEmployees$: Observable<Employee[]>;
   // @ts-ignore
-  searchedId: number;
-  searchedFirstname: string = '';
-  searchedLastname: string = '';
+  searchedId$: number;
+  searchedFirstname$: string = '';
+  searchedLastname$: string = '';
 
   constructor(private handler: ExternalEmployeeServiceHandler) {
     this.TotalEmployees$ = of([]);
@@ -33,16 +33,16 @@ export class EmployeeListComponent {
   searchForEmployee() {
     this.displayedEmployees$ = this.TotalEmployees$.pipe(
       map(employees => employees.filter(employee => {
-        let matchesId = this.searchedId > -1 ? employee.id === this.searchedId : true;
-        let matchesFirstName = this.searchedFirstname !== '' ? employee.firstName?.includes(this.searchedFirstname) : true;
-        let matchesLastName = this.searchedLastname !== '' ? employee.lastName?.includes(this.searchedLastname) : true;
+        let matchesId = this.searchedId$ > -1 ? employee.id === this.searchedId$ : true;
+        let matchesFirstName = this.searchedFirstname$ !== '' ? employee.firstName?.includes(this.searchedFirstname$) : true;
+        let matchesLastName = this.searchedLastname$ !== '' ? employee.lastName?.includes(this.searchedLastname$) : true;
 
         return matchesId && matchesFirstName && matchesLastName;
       }))
     );
   }
 
-  ResetDisplay() {
+  resetDisplay() {
     this.displayedEmployees$ = this.TotalEmployees$;
   }
 }

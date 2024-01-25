@@ -1,6 +1,10 @@
-<input type="number" [(ngModel)]="searchedId" name="id"><input type="text" [(ngModel)]="searchedFirstname"  name="firstname"><input type="text" [(ngModel)]="searchedLastname"  name="lastname"><button (click)="searchForEmployee()">Suchen</button><button (click)="ResetDisplay()">Clear Suchen</button>
-<div class="border">
-  <li *ngFor="let e of displayedEmployees$" class="content">
-    {{e.id }} {{e.firstName }} {{e.lastName}}
+<input type="number" [(ngModel)]="searchedId$" name="id"><input type="text" [(ngModel)]="searchedFirstname$"  name="firstname"><input type="text" [(ngModel)]="searchedLastname$"  name="lastname"><button (click)="searchForEmployee()">Suchen</button><button (click)="resetDisplay()">Zurücksetzen</button>
+<div class="border" *ngIf="(displayedEmployees$ | async) as employees; else load">
+  <li class="content" *ngFor="let employee of employees">
+    {{employee.id }} {{employee.firstName }} {{employee.lastName}}
   </li>
 </div>
+
+<ng-template #load>
+  <div>Loading...</div>
+</ng-template>
