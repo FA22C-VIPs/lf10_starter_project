@@ -33,8 +33,10 @@ export class EmployeeListComponent {
     this.displayedEmployees$ = this.totalEmployees$.pipe(
       map(employees => employees.filter(employee => {
         let matchesId = this.searchedId$ != null && this.searchedId$ > -1 ? employee.id === this.searchedId$ : true;
-        let matchesFirstName = this.searchedFirstname$ !== '' ? employee.firstName?.includes(this.searchedFirstname$) : true;
-        let matchesLastName = this.searchedLastname$ !== '' ? employee.lastName?.includes(this.searchedLastname$) : true;
+        let matchesFirstName = this.searchedFirstname$ !== ''
+          ? employee.firstName?.toLowerCase().includes(this.searchedFirstname$.toLowerCase()) : true;
+        let matchesLastName = this.searchedLastname$ !== ''
+          ? employee.lastName?.toLowerCase().includes(this.searchedLastname$.toLowerCase()) : true;
 
         return matchesId && matchesFirstName && matchesLastName;
       }))
