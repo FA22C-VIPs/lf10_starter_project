@@ -1,1 +1,24 @@
-<div class="border">Hier kommt die Mitarbeiter Tabelle hin</div>
+<div class="border" *ngIf="(employees$ | async) as employees; else load">
+  <div *ngFor="let employee of employees">
+    <p>Employee ID: {{ employee.id }}</p>
+    <p>Last Name: {{ employee.lastName }}</p>
+    <p>First Name: {{ employee.firstName }}</p>
+    <p>Street: {{ employee.street }}</p>
+    <p>Postcode: {{ employee.postcode }}</p>
+    <p>City: {{ employee.city }}</p>
+    <p>Phone: {{ employee.phone }}</p>
+
+    <div *ngIf="employee.skillSet && employee.skillSet.length">
+      <p>Skills:</p>
+      <ul>
+        <li *ngFor="let skill of employee.skillSet">
+          {{ skill }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #load>
+  <div>Loading...</div>
+</ng-template>
