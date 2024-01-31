@@ -1,23 +1,20 @@
-<div class="border" *ngIf="(employees$ | async) as employees; else load">
-  <div *ngFor="let employee of employees">
-    <p>Employee ID: {{ employee.id }}</p>
-    <p>Last Name: {{ employee.lastName }}</p>
-    <p>First Name: {{ employee.firstName }}</p>
-    <p>Street: {{ employee.street }}</p>
-    <p>Postcode: {{ employee.postcode }}</p>
-    <p>City: {{ employee.city }}</p>
-    <p>Phone: {{ employee.phone }}</p>
-
-    <div *ngIf="employee.skillSet && employee.skillSet.length">
-      <p>Skills:</p>
-      <ul>
-        <li *ngFor="let skill of employee.skillSet">
-          {{ skill }}
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+<input type="number" [(ngModel)]="searchedId$" name="id" placeholder="ID" (change)="onInputChange($event)"><input type="text" [(ngModel)]="searchedFirstname$"  name="firstname" placeholder="First Name" (change)="onInputChange($event)"><input type="text" [(ngModel)]="searchedLastname$"  name="lastname" placeholder="Last Name" (change)="onInputChange($event)">
+<table *ngIf="(displayedEmployees$ | async) as employees; else load">
+  <thead>
+  <tr>
+    <th>ID Number</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let employee of employees">
+    <td>{{ employee.id }}</td>
+    <td>{{ employee.firstName }}</td>
+    <td>{{ employee.lastName }}</td>
+  </tr>
+  </tbody>
+</table>
 
 <ng-template #load>
   <div>Loading...</div>
