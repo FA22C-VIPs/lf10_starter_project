@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Skillliste</h2>
+<mat-dialog-content>
+  <form class="row">
+    <div class="col-lg-5 title">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="newSkillName">
+    </div>
+    <div class="col-lg-5 title">
+    </div>
+    <button class="col-lg-2" type="button" (click)="addNewEntry()">Add Entry</button>
+  </form>
+
+  <table class="table custom-table"><!-- *ngIf="(allSkills$ | async) as skills; else load"-->
+    <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Skill ID</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Skill 1</td>
+      <td>1</td>
+      <td>Skill 1</td>
+    </tr>
+    <!--tr *ngFor="let skill of skills">
+      <td>{{ skill.skill }}</td>
+      <td>{{ skill.id }}</td>
+    </tr-->
+    </tbody>
+  </table>
+
+  <ng-template #load>
+    <div>Loading...</div>
+  </ng-template>
+</mat-dialog-content>
+
+

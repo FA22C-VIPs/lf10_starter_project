@@ -1,4 +1,4 @@
 export class Skill {
-  constructor(public skill?: string) {
+  constructor(public skill?: string, public id?: number) {
   }
 }
