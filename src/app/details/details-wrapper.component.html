@@ -1,0 +1,9 @@
+<div class="border" *ngIf="!isEmployeeSelected()">
+  <h1>Employee Management Frontend</h1>
+  <br>
+  <p>Welcome to the EMF. You can expand the employee details view by clicking on the ID number, first name or last name of a given employee.</p>
+</div>
+
+<div class="border" *ngIf="isEmployeeSelected()">
+  <app-employee-details *ngIf="isEmployeeSelected()" [employee]="employee" (onDeselect)="handleDeselection()"></app-employee-details>
+</div>

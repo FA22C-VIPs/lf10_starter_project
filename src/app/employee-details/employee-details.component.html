@@ -1,0 +1,31 @@
+<button class="exit-button" (click)="deselectEmployee()">X</button>
+<h2>Employee Details</h2>
+
+
+<div *ngIf="(employee) as employee">
+  <div>
+    <br>
+    <p><strong>Employee ID:</strong> {{ employee.id }}</p>
+    <p><strong>Last Name:</strong> {{ employee.lastName }}</p>
+    <p><strong>First Name:</strong> {{ employee.firstName }}</p>
+    <p><strong>Street:</strong> {{ employee.street }}</p>
+    <p><strong>Postcode:</strong> {{ employee.postcode }}</p>
+    <p><strong>City:</strong> {{ employee.city }}</p>
+    <p><strong>Phone:</strong> {{ employee.phone }}</p>
+
+    <div *ngIf="employee.skillSet && employee.skillSet.length">
+      <p><strong>Skills:</strong></p>
+      <ul>
+        <li *ngFor="let skill of employee.skillSet">
+          {{ skill }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button class="delete-button" (click)="deleteEmployee(employee)">Delete this employee</button>
+  <button (click)="editEmployee(employee)">Edit employee skills</button>
+</div>
+
+<ng-template #load>
+  <div>Loading...</div>
+</ng-template>

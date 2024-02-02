@@ -11,7 +11,7 @@ import {EmployeeResponseDto} from "./dto/employee-response-dto";
   imports: [ HttpClientModule ]
 })
 export class ExternalEmployeeServiceHandler {
-  private baseApiUrl = '/backend'; // This is equal to "http://localhost:8089/employees" thanks to the proxy configuration
+  private baseApiUrl = '/backend'; // This is equal to "http://localhost:8089" thanks to the proxy configuration
 
   constructor(private keycloak: KeycloakService, private http: HttpClient) {}
 
@@ -32,8 +32,19 @@ export class ExternalEmployeeServiceHandler {
         const headers = new HttpHeaders()
           .set('Content-Type', 'application/json')
           .set('Authorization', `Bearer ${token}`);
-        return this.http.get<EmployeeResponseDto[]>(this.baseApiUrl, { headers });
+        return this.http.get<EmployeeResponseDto[]>(`${this.baseApiUrl}/employees`, { headers });
       })
     );
+  }
+
+  public removeEmployeeById(id: number): Observable<any> {
+    return this.getBearerToken().pipe(
+      switchMap((tokenPromise) => tokenPromise),
+      switchMap((token) => {
+        const headers = new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `Bearer ${token}`);
+        return this.http.delete(`${this.baseApiUrl}/employees/${id}`, { headers });
+      }))
   }
 }
