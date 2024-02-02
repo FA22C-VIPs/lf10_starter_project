@@ -7,10 +7,11 @@
     </div>
     <div class="col-lg-5 title">
     </div>
-    <button class="col-lg-2" type="button" (click)="addNewEntry()">Add Entry</button>
+    <button class="col-lg-2" type="button" (click)="addNewEntry()"><img
+      src="assets/check-solid.svg" alt="External Asset" height="16" width="16"></button>
   </form>
 
-  <table class="table custom-table"><!-- *ngIf="(allSkills$ | async) as skills; else load"-->
+  <table class="table custom-table" *ngIf="(allSkills$ | async) as skills; else load">
     <thead>
     <tr>
       <th>Skill</th>
@@ -19,15 +20,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>Skill 1</td>
-      <td>1</td>
-      <td>Skill 1</td>
-    </tr>
-    <!--tr *ngFor="let skill of skills">
+    <tr *ngFor="let skill of skills">
       <td>{{ skill.skill }}</td>
       <td>{{ skill.id }}</td>
-    </tr-->
+      <td><button type="button" class="btn btn-danger" (click)="deleteSkill(skill.id)"><img
+        src="assets/trash-can-solid.svg" alt="External Asset" height="16" width="16"></button></td>
+    </tr>
     </tbody>
   </table>
 
