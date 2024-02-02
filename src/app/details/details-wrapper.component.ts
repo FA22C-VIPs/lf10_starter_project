@@ -4,17 +4,19 @@ import {EmployeeDetailsComponent} from "../employee-details/employee-details.com
 import {Employee} from "../Employee";
 import {Subscription} from "rxjs";
 import {EmployeeSharedService} from "../services/EmployeeSharedService";
+import {EmployeeCreationComponent} from "../employee-creation/employee-creation.component";
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, EmployeeDetailsComponent],
+  imports: [CommonModule, EmployeeDetailsComponent, EmployeeCreationComponent],
   templateUrl: './details-wrapper.component.html',
   styleUrl: './details-wrapper.component.css'
 })
 export class DetailsWrapperComponent implements OnInit, OnDestroy {
   employee: Employee | null = null;
   private subscription: Subscription = new Subscription();
+  private employeeCreationClicked: boolean = false;
 
   constructor(private employeeSharedService: EmployeeSharedService) {}
 
@@ -22,6 +24,11 @@ export class DetailsWrapperComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.employeeSharedService.selectedEmployee$.subscribe(employee => {
         this.employee = employee;
+      })
+    );
+    this.subscription.add(
+      this.employeeSharedService.employeeCreationClicked$.subscribe(employeeCreation => {
+        this.employeeCreationClicked = employeeCreation;
       })
     );
   }
@@ -35,6 +42,10 @@ export class DetailsWrapperComponent implements OnInit, OnDestroy {
   }
 
   handleDeselection() {
-    this.employee = null;
+    this.employeeSharedService.resetEmployeeSelection();
+  }
+
+  isEmployeeCreationClicked() {
+    return this.employeeCreationClicked;
   }
 }

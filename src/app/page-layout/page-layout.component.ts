@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {EmployeeListComponent} from "../employee-list/employee-list.component";
 import {DetailsWrapperComponent} from "../details/details-wrapper.component";
 import {LogoutButtonComponent} from "../logout-button/logout-button.component";
+import {EmployeeSharedService} from "../services/EmployeeSharedService";
 
 @Component({
   selector: 'page-layout',
@@ -15,10 +16,10 @@ import {LogoutButtonComponent} from "../logout-button/logout-button.component";
   styleUrls: ['./page-layout.component.css']
 })
 export class PageLayout {
-  constructor() {}
+  constructor(private employeeSharedService: EmployeeSharedService) {}
 
   handleNewEmployee() {
-
+    this.employeeSharedService.openEmployeeCreation();
   }
 
   handelSkillList() {

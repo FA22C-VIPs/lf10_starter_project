@@ -32,7 +32,6 @@ export class EmployeeListComponent {
     });
   }
 
-
   fetchData() {
     this.totalEmployees$ = this.handler.requestAllEmployees();
   }

@@ -1,7 +1,6 @@
 <button class="exit-button" (click)="deselectEmployee()">X</button>
 <h2>Employee Details</h2>
 
-
 <div *ngIf="(employee) as employee">
   <div>
     <br>
@@ -25,7 +24,3 @@
   <button class="delete-button" (click)="deleteEmployee(employee)">Delete this employee</button>
   <button (click)="editEmployee(employee)">Edit employee skills</button>
 </div>
-
-<ng-template #load>
-  <div>Loading...</div>
-</ng-template>
