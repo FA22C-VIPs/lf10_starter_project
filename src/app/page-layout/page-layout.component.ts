@@ -1,12 +1,10 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {EmployeeListComponent} from "../employee-list/employee-list.component";
 import {DetailsWrapperComponent} from "../details/details-wrapper.component";
 import {LogoutButtonComponent} from "../logout-button/logout-button.component";
-import {AllSkillListComponent} from "../all-skill-list/all-skill-list.component";
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {EmployeeSharedService} from "../services/EmployeeSharedService";
 import {AllSkillListComponent} from "../all-skill-list/all-skill-list.component";
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'page-layout',
