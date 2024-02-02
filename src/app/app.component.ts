@@ -7,7 +7,7 @@ import {ExternalSkillServiceHandler} from "./services/external-skill-service-han
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, EmployeeListComponent,PageLayout],
+  imports: [CommonModule, EmployeeListComponent,PageLayout,ExternalSkillServiceHandler],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
