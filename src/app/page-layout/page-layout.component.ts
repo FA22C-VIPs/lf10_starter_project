@@ -28,16 +28,8 @@ export class PageLayout {
 
   openSkillliste() {
     this.dialog.open(AllSkillListComponent, {
-      position: {
-        top: '10px',
-        right: '10px'
-      },
-      height: '98%',
-      width: '100vw',
-      panelClass: 'full-screen-modal',
-      data: {
-        animal: 'panda',
-      },
+      height: '400px',
+      width: '600px',
     });
   }
 }
