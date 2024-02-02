@@ -1,0 +1,8 @@
+.exit-button {
+  float: right;
+}
+
+.delete-button {
+  float: right;
+  color: red;
+}

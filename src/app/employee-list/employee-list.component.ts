@@ -4,6 +4,7 @@ import {map, Observable, of} from "rxjs";
 import {Employee} from "../Employee";
 import {ExternalEmployeeServiceHandler} from "../services/external-employee-service-handler";
 import {FormsModule} from "@angular/forms";
+import {EmployeeSharedService} from "../services/EmployeeSharedService";
 
 @Component({
   selector: 'app-employee-list',
@@ -19,10 +20,16 @@ export class EmployeeListComponent {
   searchedFirstname$: string = '';
   searchedLastname$: string = '';
 
-  constructor(private handler: ExternalEmployeeServiceHandler) {
+  constructor(private handler: ExternalEmployeeServiceHandler, private employeeSharedService: EmployeeSharedService) {
     this.totalEmployees$ = of([]);
     this.fetchData();
     this.displayedEmployees$ = this.totalEmployees$;
+    this.employeeSharedService.employeeDeleted$.subscribe((deletedEmployeeId) => {
+      if (deletedEmployeeId !== null) {
+        this.fetchData();
+        this.resetDisplay();
+      }
+    });
   }
 
   fetchData() {
@@ -49,5 +56,9 @@ export class EmployeeListComponent {
 
   onInputChange($event: Event) {
     this.searchForEmployee();
+  }
+
+  onEmployeeClick(employee: Employee) {
+    this.employeeSharedService.selectEmployee(employee);
   }
 }
