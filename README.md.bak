@@ -97,7 +97,3 @@ Des Weiteren ist der Client mit der Bezeichnung employee-management-service-fron
 
 Trage hier die Features ein, die nicht funktionieren. Beschreibe den jeweiligen Fehler. 
 
-Wir sind leider nicht ganz fertig geworden uns fehlen große teile wie das bearbeiten der Mitarbeiter(PUT).
-Das hinzufügen von Qualifikationen existiert nur als idee und konnte leider nicht mehr komplett umgesetzt werden.
-Und aufgrunde der Zeit knappheit konnten wir weder Test schreiben noch weiter per Hand testen.
-

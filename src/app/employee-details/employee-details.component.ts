@@ -3,16 +3,20 @@ import {CommonModule} from "@angular/common";
 import {Employee} from "../Employee";
 import {ExternalEmployeeServiceHandler} from "../services/external-employee-service-handler";
 import {EmployeeSharedService} from "../services/EmployeeSharedService";
+import {AllSkillListComponent} from "../all-skill-list/all-skill-list.component";
+import {MatDialog} from "@angular/material/dialog";
+import {EmployeeSkillList} from "../employee-skill-list/employee-skill-list.component";
+import {QualificationGetDto} from "../services/dto/qualification-get-dto";
 
 @Component({
   selector: 'app-employee-details',
   standalone: true,
-  imports: [CommonModule,ExternalEmployeeServiceHandler],
+  imports: [CommonModule, ExternalEmployeeServiceHandler],
   templateUrl: './employee-details.component.html',
   styleUrl: './employee-details.component.css'
 })
 export class EmployeeDetailsComponent {
-  constructor(private handler: ExternalEmployeeServiceHandler, private employeeSharedService: EmployeeSharedService) {
+  constructor(private handler: ExternalEmployeeServiceHandler, private employeeSharedService: EmployeeSharedService, public dialog: MatDialog) {
   }
 
   @Input() employee: Employee | null = null;
@@ -23,7 +27,13 @@ export class EmployeeDetailsComponent {
   }
 
   editEmployeeSkills(employee: Employee) {
-    // Placeholder for a different ticket
+    this.dialog.open(EmployeeSkillList, {
+      height: '400px',
+      width: '600px',
+      data: {
+        data: {employee}
+      }
+    });
   }
 
   deleteEmployee(employee: Employee) {

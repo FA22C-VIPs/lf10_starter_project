@@ -1,0 +1,18 @@
+<mat-dialog-content>
+  <table class="table custom-table">
+    <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Skill ID</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let skill of data.employee.skillSet">
+      <td>{{ skill.skill }}</td>
+      <td>{{ skill.id }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</mat-dialog-content>

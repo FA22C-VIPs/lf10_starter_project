@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Skillliste</h2>
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-5">
+      <label>Auswahl:</label>
+      <select [(ngModel)]="newSkill" name="auswahl">
+        <option *ngFor="let skill of allSkills" [value]="skill.skill">{{ skill.skill }}</option>
+      </select>
+    </div>
+    <div class="col-5"></div>
+    <button class="col-2" type="button" (click)="addNewEntry()"><img
+      src="assets/check-solid.svg" alt="External Asset" height="16" width="16"></button>
+  </div>
+
+  <table class="table custom-table">
+    <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Skill ID</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let entry of knownSkills">
+      <td>{{ entry.skill }}</td>
+      <td>{{ entry.id }}</td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)="deleteSkill(entry.id)"><img
+          src="assets/trash-can-solid.svg" alt="External Asset" height="16" width="16"></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <ng-template #load>
+    <div>Loading...</div>
+  </ng-template>
+</mat-dialog-content>
