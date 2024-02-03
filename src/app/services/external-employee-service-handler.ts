@@ -1,8 +1,9 @@
 import {Injectable, NgModule} from '@angular/core';
 import { KeycloakService } from "keycloak-angular";
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Observable, of, switchMap} from 'rxjs';
+import {Observable, of, switchMap, tap} from 'rxjs';
 import {EmployeeResponseDto} from "./dto/employee-response-dto";
+import {EmployeeRequestDto} from "./dto/employee-request-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,26 @@ export class ExternalEmployeeServiceHandler {
           .set('Authorization', `Bearer ${token}`);
         return this.http.delete(`${this.baseApiUrl}/employees/${id}`, { headers });
       }))
+  }
+
+  public addEmployee(formData: EmployeeRequestDto) {
+    console.log("nei!!!!!!")
+    console.log("Request Body:", JSON.stringify(formData));
+    return this.getBearerToken().pipe(
+      switchMap((tokenPromise) => tokenPromise),
+      switchMap((token) => {
+        const headers = new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `Bearer ${token}`);
+        console.log("yes!!!!!!")
+        console.log(formData)
+        return this.http.post<any>(this.baseApiUrl + "/employees", formData, { headers }).pipe(
+          tap(response => {
+            // Log the HTTP response here
+            console.log('HTTP Response:', response);
+          })
+        );
+      })
+    );
   }
 }

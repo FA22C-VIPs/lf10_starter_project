@@ -9,8 +9,8 @@ export class EmployeeSharedService {
   private selectedEmployeeSource = new BehaviorSubject<Employee | null>(null);
   selectedEmployee$ = this.selectedEmployeeSource.asObservable();
 
-  private employeeDeletedSource = new BehaviorSubject<number | null>(null);
-  employeeDeleted$ = this.employeeDeletedSource.asObservable();
+  private employeeChangedSource = new BehaviorSubject<number | null>(null);
+  employeesChanged$ = this.employeeChangedSource.asObservable();
 
   private employeeCreationClickedSource = new BehaviorSubject<boolean>(false);
   employeeCreationClicked$ = this.employeeCreationClickedSource.asObservable();
@@ -23,12 +23,21 @@ export class EmployeeSharedService {
   }
 
   notifyEmployeeDeletion(employeeId: number) {
-    this.employeeDeletedSource.next(employeeId);
+    this.employeeChangedSource.next(employeeId);
+  }
+
+  notifyEmployeeCreation() {
+    this.employeeCreationClickedSource.next(false);
+    this.employeeChangedSource.next(1);
   }
 
   openEmployeeCreation() {
     this.employeeCreationClickedSource.next(true);
     this.resetEmployeeSelection();
+  }
+
+  closedEmployeeCreation(){
+    this.employeeCreationClickedSource.next(false);
   }
 
   resetEmployeeSelection() {

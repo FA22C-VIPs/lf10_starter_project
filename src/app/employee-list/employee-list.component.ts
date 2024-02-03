@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {map, Observable, of} from "rxjs";
 import {Employee} from "../Employee";
 import {ExternalEmployeeServiceHandler} from "../services/external-employee-service-handler";
@@ -24,7 +24,7 @@ export class EmployeeListComponent {
     this.totalEmployees$ = of([]);
     this.fetchData();
     this.displayedEmployees$ = this.totalEmployees$;
-    this.employeeSharedService.employeeDeleted$.subscribe((deletedEmployeeId) => {
+    this.employeeSharedService.employeesChanged$.subscribe((deletedEmployeeId) => {
       if (deletedEmployeeId !== null) {
         this.fetchData();
         this.resetDisplay();

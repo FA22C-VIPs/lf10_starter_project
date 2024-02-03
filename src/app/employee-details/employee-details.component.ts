@@ -22,7 +22,7 @@ export class EmployeeDetailsComponent {
     this.onDeselect.emit();
   }
 
-  editEmployee(employee: Employee) {
+  editEmployeeSkills(employee: Employee) {
     // Placeholder for a different ticket
   }
 
